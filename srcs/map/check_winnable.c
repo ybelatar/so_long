@@ -1,0 +1,56 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   check_winnable.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ybelatar <ybelatar@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/12/10 17:41:01 by ybelatar          #+#    #+#             */
+/*   Updated: 2023/12/14 16:57:25 by ybelatar         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "so_long.h"
+
+void	flood_fill(char ***map, int x, int y, t_game *game)
+{
+	if (x >= game->counter.lines || x < 0 || y >= game->counter.columns
+		|| y < 0)
+		return ;
+	if ((*map)[x][y] == '1')
+		return ;
+	(*map)[x][y] = '1';
+	flood_fill(map, x + 1, y, game);
+	flood_fill(map, x, y + 1, game);
+	flood_fill(map, x - 1, y, game);
+	flood_fill(map, x, y - 1, game);
+}
+
+void	check_winnable(t_game *game)
+{
+	char	**copy;
+	int		i;
+	int		j;
+	int		h;
+
+	h = game->counter.lines;
+	game->counter.columns = ft_strlen(game->map[0]);
+	copy = ft_copy(game->map, game);
+	flood_fill(&copy, game->position.x, game->position.y, game);
+	i = 0;
+	while (copy[i])
+	{
+		j = 0;
+		while (copy[i][j])
+		{
+			if (copy[i][j] != '0' && copy[i][j] != '1')
+			{
+				free_map(copy);
+				exit_error(ERR_WINNABLE, 1, 0, game);
+			}
+			j++;
+		}
+		i++;
+	}
+	free_map(copy);
+}
