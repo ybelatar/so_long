@@ -6,7 +6,7 @@
 /*   By: ybelatar <ybelatar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/10 17:40:49 by ybelatar          #+#    #+#             */
-/*   Updated: 2023/12/13 21:35:47 by ybelatar         ###   ########.fr       */
+/*   Updated: 2023/12/19 16:21:47 by ybelatar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,16 @@ void	check_closed(t_game *game)
 		if (i == 0 || i == game->counter.lines - 1)
 		{
 			if (full_close(game->map[i]))
+			{
+				close(game->fd);
 				exit_error(ERR_CLOSED, 1, 0, game);
+			}
 		}
 		else if (game->map[i][0] != '1' || game->map[i][len - 1] != '1')
+		{
+			close(game->fd);
 			exit_error(ERR_CLOSED, 1, 0, game);
+		}
 		i++;
 	}
 }

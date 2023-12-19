@@ -6,7 +6,7 @@
 /*   By: ybelatar <ybelatar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/06 17:40:06 by ybelatar          #+#    #+#             */
-/*   Updated: 2023/12/14 16:58:28 by ybelatar         ###   ########.fr       */
+/*   Updated: 2023/12/19 16:18:23 by ybelatar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ typedef struct s_game
 	t_pos		position;
 	t_map_cpt	counter;
 	int			steps;
+	int			fd;
 }				t_game;
 
 /* Parsing */

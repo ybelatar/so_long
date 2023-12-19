@@ -6,7 +6,7 @@
 /*   By: ybelatar <ybelatar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/10 17:41:04 by ybelatar          #+#    #+#             */
-/*   Updated: 2023/12/13 21:35:32 by ybelatar         ###   ########.fr       */
+/*   Updated: 2023/12/19 16:18:10 by ybelatar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ void	init_map(char *path, t_game *game)
 	fd = open(path, O_RDONLY);
 	if (fd < 0)
 		exit_error(ERR_OPEN, 0, 0, game);
+	game->fd = fd;
 	game->map = get_map(fd, game);
 	if (!(game->map))
 	{

@@ -6,7 +6,7 @@
 /*   By: ybelatar <ybelatar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/10 17:40:56 by ybelatar          #+#    #+#             */
-/*   Updated: 2023/12/14 16:42:50 by ybelatar         ###   ########.fr       */
+/*   Updated: 2023/12/19 16:24:50 by ybelatar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,12 @@ void	add_player(t_game *game, int i, int j)
 	game->position.x = i;
 	game->position.y = j;
 	game->counter.player++;
+}
+
+void trnover(char *str, t_game *game)
+{
+	close(game->fd);
+	exit_error(str, 1, 0, game);
 }
 
 void	check_count(t_game *game)
@@ -45,12 +51,12 @@ void	check_count(t_game *game)
 			else if (game->map[i][j] == 'C')
 				game->counter.collectible++;
 			else if (game->map[i][j] != '0' && game->map[i][j] != '1')
-				exit_error(ERR_UKNWN, 1, 0, game);
+				trnover(ERR_UKNWN, game);
 			j++;
 		}
 		i++;
 	}
 	if (game->counter.player != 1 || game->counter.exit != 1
 		|| game->counter.collectible < 1)
-		exit_error(ERR_COUNT, 1, 0, game);
+		trnover(ERR_COUNT, game);
 }

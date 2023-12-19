@@ -6,7 +6,7 @@
 /*   By: ybelatar <ybelatar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/10 17:40:58 by ybelatar          #+#    #+#             */
-/*   Updated: 2023/12/13 21:41:38 by ybelatar         ###   ########.fr       */
+/*   Updated: 2023/12/19 16:19:04 by ybelatar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,10 @@ void	check_rectangle(t_game *game)
 	while (game->map[i])
 	{
 		if (ft_strlen(game->map[i]) != len)
+		{
+			close(game->fd);
 			exit_error(ERR_RECTANGLE, 1, 0, game);
+		}
 		i++;
 	}
 }
